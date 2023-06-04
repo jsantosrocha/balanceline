@@ -1,8 +1,6 @@
 package org.example.domain;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -17,6 +15,12 @@ public class File{
         this.path = path;
         this.keyStart = keyStart;
         this.keyEnd = keyEnd;
+    }
+
+    public File(String path) {
+        this.path = path;
+        this.keyStart = 0;
+        this.keyEnd = 0;
     }
 
     public void readFile(){
@@ -38,9 +42,21 @@ public class File{
         }
     }
 
+    public void writeFile(List<Record> listRecord){
+        try(BufferedWriter fileOut = new BufferedWriter(new FileWriter(path))){
+            for (Record r: listRecord) {
+                fileOut.write(r.recordLine());
+                fileOut.write(System.lineSeparator());
+            }
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
     public int getSizeRecordList() {
         return recordList.size();
     }
+
     public List<Record> getRecordList() {
         return recordList;
     }
