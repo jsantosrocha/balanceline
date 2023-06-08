@@ -6,12 +6,19 @@ import org.example.domain.Record;
 
 import java.util.List;
 
-public class MathFiles {
+public class Main {
     public static void main(String[] args) {
 
-        if (args.length < 5){
+        if ((args.length < 5) || (Integer.parseInt(args[3]) <= 0) || (Integer.parseInt(args[4]) <= 0)){
+            System.out.println();
             System.out.println("Number of params invalid, try:");
-            System.out.println("\"java MathFiles <fileIn1> <fileIn2> <fileOut> <posKey> <lengthKey>\"");
+            System.out.println("java -jar balanceline.jar <fileIn1> <fileIn2> <fileOut> <posKey> <lengthKey>");
+            System.out.println("fileIn1....= File in 1");
+            System.out.println("fileIn2....= File in 2");
+            System.out.println("fileOut....= File out");
+            System.out.println("posKey.....= Initial position of key, value must be greater than zero");
+            System.out.println("lengthKey..= Length key, value must be greater than zero");
+            System.out.println();
             System.exit(1);
         }
 
@@ -19,7 +26,7 @@ public class MathFiles {
         String pathFile2 = args[1];
         String pathFile3 = args[2];
 
-        int keyStart = Integer.parseInt(args[3]);
+        int keyStart = (Integer.parseInt(args[3]) - 1);
         int keyLength = Integer.parseInt(args[4]);
         int keyEnd = keyStart + keyLength;
 
